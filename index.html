@@ -3,91 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Contacto - Flores y Globos</title>
+    <title>WhatsApp - Tienda MAIA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9f9f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        h2 { color: #d81b60; text-align: center; margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
-        select, input, textarea { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
-        .required { color: red; }
-        button { width: 100%; padding: 12px; background-color: #d81b60; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; transition: background 0.3s; }
-        button:hover { background-color: #ad1457; }
-        #mensaje-exito { display: none; color: green; text-align: center; font-weight: bold; margin-top: 10px; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 400px; text-align: center; }
+        .header { background-color: #25d366; padding: 20px; color: white; }
+        .header i { font-size: 50px; margin-bottom: 10px; }
+        .content { padding: 30px; }
+        h2 { margin: 0 0 15px; color: #333; font-size: 24px; }
+        p { color: #666; line-height: 1.5; font-size: 16px; margin-bottom: 25px; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        .btn { padding: 15px; border-radius: 12px; border: none; font-size: 18px; font-weight: bold; cursor: pointer; transition: transform 0.2s, background 0.3s; text-decoration: none; display: block; }
+        .btn-ecatepec { background-color: #25d366; color: white; }
+        .btn-tecamac { background-color: #128c7e; color: white; }
+        .btn:active { transform: scale(0.98); }
+        .footer { padding: 20px; font-size: 12px; color: #999; letter-spacing: 1px; }
+        .footer span { color: #a349a4; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Registro de Contacto 💐🎈</h2>
+<div class="card">
+    <div class="header">
+        <i class="fab fa-whatsapp"></i>
+        <div>Contáctanos directo por WhatsApp 🌿</div>
+    </div>
     
-    <form id="formulario-contacto">
-        <label for="sucursal">Sucursal a contactar <span class="required">*</span></label>
-        <select id="sucursal" name="sucursal" required>
-            <option value="" disabled selected>Selecciona una opción...</option>
-            <option value="Ecatepec">Ecatepec</option>
-            <option value="Tecámac">Tecámac</option>
-        </select>
+    <div class="content">
+        <h2>¿Deseas contactarnos por WhatsApp?</h2>
+        <p>Selecciona tu sucursal para redirigirte al chat y enviarnos un mensaje sobre tu arreglo de flores o globos 🌷 🌸</p>
+        
+        <div class="btn-group">
+            <button onclick="registrarYEnviar('Ecatepec')" class="btn btn-ecatepec">✓ Sucursal Ecatepec ✓</button>
+            <button onclick="registrarYEnviar('Tecámac')" class="btn btn-tecamac">✓ Sucursal Tecámac ✓</button>
+        </div>
+    </div>
 
-        <label for="nombre_wa">Nombre (WhatsApp) <span class="required">*</span></label>
-        <input type="text" id="nombre_wa" name="nombre_wa" placeholder="Ej. Ana Pérez" required>
-
-        <label for="celular">Número Celular <span class="required">*</span></label>
-        <input type="tel" id="celular" name="celular" placeholder="10 dígitos" required pattern="[0-9]{10}">
-
-        <label for="red_social">¿De qué red social nos contactas?</label>
-        <select id="red_social" name="red_social">
-            <option value="Facebook">Facebook</option>
-            <option value="Instagram">Instagram</option>
-            <option value="TikTok">TikTok</option>
-            <option value="WhatsApp">WhatsApp Directo</option>
-        </select>
-
-        <input type="hidden" id="plataforma" name="plataforma" value="Web/Github">
-
-        <button type="submit" id="btn-continuar">Continuar</button>
-    </form>
-
-    <div id="mensaje-exito">¡Datos enviados correctamente!</div>
+    <div class="footer">
+        TIENDA <span>MAIA</span>
+    </div>
 </div>
 
 <script>
-    // URL de tu Web App de Google Apps Script (Reemplázala con tu URL de implementación)
-    const APP_URL = "ESCRIBE_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT";
+    // REEMPLAZA ESTA URL con la de tu "Nueva implementación" de Google Apps Script
+    const WEB_APP_URL = "URL_DE_TU_SCRIPT_AQUI";
+    
+    // Configura aquí tu número de WhatsApp (incluye código de país, ej: 521...)
+    const TELEFONO_WA = "521XXXXXXXXXX"; 
+    const MENSAJE_PREDETERMINADO = encodeURIComponent("Hola!! Estoy interesada en un arreglo de flores 💐 y/o globos 🎈…");
 
-    document.getElementById('formulario-contacto').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const btn = document.getElementById('btn-continuar');
-        const msg = document.getElementById('mensaje-exito');
-        
-        btn.disabled = true;
-        btn.innerText = "Enviando...";
+    function registrarYEnviar(sucursal) {
+        // Desactivar botones para evitar doble clic
+        const botones = document.querySelectorAll('.btn');
+        botones.forEach(b => b.disabled = true);
+        botones[0].innerText = "Procesando...";
 
-        const formData = new FormData(this);
-        const data = {};
-        formData.forEach((value, key) => data[key] = value);
-
-        // Convertir a parámetros de URL para el doPost del Script
-        const queryString = new URLSearchParams(data).toString();
-
-        fetch(APP_URL + "?" + queryString, {
-            method: 'POST'
+        // Enviar datos al Script
+        fetch(`${WEB_APP_URL}?sucursal=${encodeURIComponent(sucursal)}&red_social=Github-Web`, {
+            method: 'POST',
+            mode: 'no-cors' // Importante para evitar bloqueos de CORS
         })
-        .then(response => {
-            msg.style.display = 'block';
-            this.reset();
-            btn.disabled = false;
-            btn.innerText = "Continuar";
-            setTimeout(() => msg.style.display = 'none', 5000);
+        .then(() => {
+            // Redirigir a WhatsApp después de registrar
+            window.location.href = `https://wa.me/${TELEFONO_WA}?text=${MENSAJE_PREDETERMINADO}`;
         })
-        .catch(error => {
-            alert("Error al enviar los datos. Revisa la consola.");
-            console.error(error);
-            btn.disabled = false;
-            btn.innerText = "Continuar";
+        .catch(err => {
+            console.error("Error:", err);
+            // Redirigir de todos modos si el registro falla para no perder la venta
+            window.location.href = `https://wa.me/${TELEFONO_WA}?text=${MENSAJE_PREDETERMINADO}`;
         });
-    });
+    }
 </script>
 
 </body>
