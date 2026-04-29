@@ -1,93 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp - Tienda MAIA</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #fce4ec; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 90%; max-width: 400px; text-align: center; }
-        .header { background-color: #2e7d32; padding: 25px; color: white; }
-        .header i { font-size: 45px; background: white; color: #2e7d32; border-radius: 50%; padding: 10px; }
-        .content { padding: 30px; }
-        h2 { font-size: 22px; color: #333; margin-bottom: 10px; }
-        p { color: #777; font-size: 15px; margin-bottom: 25px; }
-        
-        .sucursales { display: flex; gap: 10px; margin-bottom: 25px; }
-        .btn-sucursal { flex: 1; padding: 12px; border: 2px solid #a349a4; border-radius: 12px; background: white; color: #a349a4; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-sucursal.active { background: #a349a4; color: white; }
-        
-        .footer-btns { display: flex; gap: 10px; border-top: 1px solid #eee; padding-top: 20px; }
-        .btn-cerrar { flex: 1; background: #f5f5f5; border: none; padding: 15px; border-radius: 15px; color: #666; font-weight: bold; cursor: pointer; }
-        .btn-aceptar { flex: 1; background: #2fb361; border: none; padding: 15px; border-radius: 15px; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(47, 179, 97, 0.3); }
-        .btn-aceptar:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
-        
-        .tienda-label { margin-top: 25px; font-size: 11px; color: #bbb; letter-spacing: 2px; text-transform: uppercase; }
-        .tienda-label span { color: #a349a4; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contactar por WhatsApp - TIENDA MAIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --wa-green: #25D366; --wa-dark: #075E54;
+      --maia-purple: #a349a4; --maia-light: #fce4ec;
+      --radius: 18px;
+    }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; margin: 0;
+    }
+    .card {
+      background: #fff; border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      max-width: 360px; width: 100%; overflow: hidden; position: relative;
+    }
+    .card-header {
+      background: linear-gradient(160deg, var(--wa-dark) 0%, var(--wa-green) 100%);
+      padding: 28px; text-align: center; color: white;
+    }
+    .card-body { padding: 28px; text-align: center; }
+    h2 { font-size: 1.25rem; font-weight: 800; color: #333; margin-bottom: 12px; }
+    .sucursal-btns { display: flex; gap: 10px; margin: 20px 0; }
+    .btn-suc {
+      flex: 1; padding: 12px; border: 2px solid var(--maia-purple); border-radius: 12px;
+      background: white; color: var(--maia-purple); font-weight: 700; cursor: pointer; transition: 0.3s;
+    }
+    .btn-suc.active { background: var(--maia-purple); color: white; }
+    
+    .card-footer { display: flex; gap: 12px; padding: 0 28px 20px; }
+    .btn-aceptar {
+      flex: 1; background: #4CAF50; color: white; padding: 14px; border: none;
+      border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+    }
+    .btn-aceptar:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
+    .tienda-footer { padding-bottom: 20px; font-size: 11px; color: #bbb; text-align: center; letter-spacing: 2px; }
+    .tienda-footer span { color: var(--maia-purple); font-weight: bold; }
+  </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="header">
-        <i class="fab fa-whatsapp"></i>
-        <div style="margin-top:10px; font-weight:bold;">Contáctanos directo por WhatsApp 🌿</div>
-    </div>
+  <div class="card-header">
+    <div style="font-size: 40px;">🌿</div>
+    <p>Contáctanos directo por WhatsApp</p>
+  </div>
+  <div class="card-body">
+    <h2>¿Deseas contactarnos por WhatsApp?</h2>
+    <p style="font-size: 14px; color: #666;">Selecciona tu sucursal para enviarnos un mensaje directo sobre tu arreglo de flores o globos 🌷 🎈</p>
     
-    <div class="content">
-        <h2>¿Deseas contactarnos por WhatsApp?</h2>
-        <p>Te redirigiremos a WhatsApp donde podrás enviarnos un mensaje directo sobre tu arreglo de flores o globos 🌷 🌸</p>
-        
-        <div class="sucursales">
-            <button type="button" onclick="selectSuc('Ecatepec')" id="eca" class="btn-sucursal">Ecatepec</button>
-            <button type="button" onclick="selectSuc('Tecámac')" id="tec" class="btn-sucursal">Tecámac</button>
-        </div>
-
-        <div class="footer-btns">
-            <button class="btn-cerrar" onclick="window.close()">Cerrar</button>
-            <button class="btn-aceptar" id="btn-submit" onclick="enviar()" disabled>✓ Aceptar ✓</button>
-        </div>
-
-        <div class="tienda-label">TIENDA <span>MAIA</span></div>
+    <div class="sucursal-btns">
+      <button class="btn-suc" id="btnEca" onclick="selectSuc('Ecatepec')">Ecatepec</button>
+      <button class="btn-suc" id="btnTec" onclick="selectSuc('Tecámac')">Tecámac</button>
     </div>
+  </div>
+
+  <div class="card-footer">
+    <button class="btn-aceptar" id="btnAceptar" onclick="enviar()" disabled>✓ ACEPTAR ✓</button>
+  </div>
+  <div class="tienda-footer">TIENDA <span>M A I A</span></div>
 </div>
 
 <script>
-    let sucursalSeleccionada = "";
-    // URL de tu Script actualizada[cite: 1]
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw-5LEqt493I-eJ7XbNSw2t1Q1VsMXZsjtl8Tu5vhtcLT8T36zWv16e9EGIYM2HTtbB/exec";
+  let sucSel = "";
+  // Nueva URL de tu Script de Google
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBFqf84lPlw0owoXYCc8b2ISyq2hMvISO3TKVoZQEWiPhnlck7weIGUcsseuFmLi8H/exec";
 
-    function selectSuc(nombre) {
-        sucursalSeleccionada = nombre;
-        document.getElementById('eca').classList.remove('active');
-        document.getElementById('tec').classList.remove('active');
-        if(nombre === 'Ecatepec') document.getElementById('eca').classList.add('active');
-        if(nombre === 'Tecámac') document.getElementById('tec').classList.add('active');
-        document.getElementById('btn-submit').disabled = false;
+  function selectSuc(name) {
+    sucSel = name;
+    document.getElementById('btnEca').classList.remove('active');
+    document.getElementById('btnTec').classList.remove('active');
+    if(name === 'Ecatepec') document.getElementById('btnEca').classList.add('active');
+    else document.getElementById('btnTec').classList.add('active');
+    document.getElementById('btnAceptar').disabled = false;
+  }
+
+  async function enviar() {
+    const btn = document.getElementById('btnAceptar');
+    const originalText = btn.innerText;
+    btn.innerText = "Registrando...";
+    btn.disabled = true;
+
+    const ahora = new Date();
+    // Preparar datos para las 20 columnas de la hoja
+    const payload = {
+      sucursal: sucSel,
+      fecha: ahora.toLocaleDateString('es-MX'),
+      hora: ahora.toLocaleTimeString('es-MX', {hour12:false}),
+      mensaje: "Hola!! Estoy interesada en un arreglo de flores 💐 y/o globos 🎈…",
+      plataforma: "GitHub Web",
+      notas: "Contacto via Web - " + sucSel
+    };
+
+    try {
+      // Envío al Script de Google
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) { 
+      console.log("Error de registro:", e); 
     }
 
-    function enviar() {
-        const btn = document.getElementById('btn-submit');
-        btn.disabled = true;
-        btn.innerText = "Cargando...";
-
-        // Obtenemos la red social de la URL si existe (ej: ?utm_source=Facebook)
-        const urlParams = new URLSearchParams(window.location.search);
-        const redSocial = urlParams.get('notas') || "RedSocial_GitHub";
-
-        const finalUrl = `${WEB_APP_URL}?sucursal=${encodeURIComponent(sucursalSeleccionada)}&notas=${encodeURIComponent(redSocial)}`;
-
-        // Registro silencioso
-        const img = new Image();
-        img.src = finalUrl;
-
-        // Redirección a WhatsApp[cite: 1]
-        setTimeout(() => {
-            window.location.href = "https://wa.me/5215579248882?text=Hola!!%20Estoy%20interesada%20en%20un%20arreglo%20de%20flores%20%F0%9F%92%90y%2Fo%20globos%20%F0%9F%8E%88%E2%80%A6";
-        }, 700);
-    }
+    // Redirección a WhatsApp con emojis correctamente codificados[cite: 3]
+    const waUrl = "https://api.whatsapp.com/send?phone=5215579248882&text=Hola!!%20Estoy%20interesada%20en%20un%20arreglo%20de%20flores%20%F0%9F%92%90y%2Fo%20globos%20%F0%9F%8E%88%E2%80%A6";
+    
+    setTimeout(() => {
+        window.location.href = waUrl;
+    }, 600);
+  }
 </script>
-
 </body>
 </html>
