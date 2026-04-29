@@ -79,7 +79,6 @@
 
 <script>
   let sucursal = "";
-  // Nuevo enlace de ejecución de Google Apps Script[cite: 1]
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOEassqt3vm8jataWRu6BW1MUVyZEbdI1Pgs-HPFyLowjXqAWWC-GJZk25EW3vAvJ4/exec";
 
   function sel(n) {
@@ -94,13 +93,20 @@
     const btn = document.getElementById('btnOk');
     btn.disabled = true; btn.innerText = "Registrando...";
     
+    // Capturar la red social desde el parámetro 'src' de tus links[cite: 7]
+    const urlParams = new URLSearchParams(window.location.search);
+    const fuenteRaw = urlParams.get('src') || "Bio General";
+    
+    // Formatear el nombre de la red social (primera letra en mayúscula)
+    const redSocial = fuenteRaw.charAt(0).toUpperCase() + fuenteRaw.slice(1);
+
     const payload = {
       sucursal: sucursal,
-      notas: "Registro desde GitHub - " + sucursal
+      // Formato solicitado: Registro desde GitHub - [RedSocial] - Sucursal [Nombre]
+      notas: "Registro desde GitHub - " + redSocial + " - Sucursal " + sucursal
     };
 
     try {
-      // Envío de datos al Script de Google[cite: 5, 7]
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -109,11 +115,11 @@
       });
     } catch (e) { console.warn(e); }
 
-    // Redirección a WhatsApp[cite: 4, 7]
+    // Redirección a WhatsApp[cite: 7]
     window.location.href = "https://api.whatsapp.com/send?phone=5215579248882&text=Hola!!%20Estoy%20interesada%20en%20un%20arreglo%20de%20flores%20%F0%9F%92%90y%2Fo%20globos%20%F0%9F%8E%88%E2%80%A6";
   }
 
-  // Generador de fondo animado[cite: 4, 7]
+  // Generador de fondo animado[cite: 4]
   const emojis = ['🌸','🎈','🌷','💐','🌼'];
   const bg = document.getElementById('bgDeco');
   for (let i = 0; i < 20; i++) {
