@@ -79,6 +79,7 @@
 
 <script>
   let sucursal = "";
+  // SCRIPT_URL de tu última implementación exitosa
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOEassqt3vm8jataWRu6BW1MUVyZEbdI1Pgs-HPFyLowjXqAWWC-GJZk25EW3vAvJ4/exec";
 
   function sel(n) {
@@ -93,20 +94,27 @@
     const btn = document.getElementById('btnOk');
     btn.disabled = true; btn.innerText = "Registrando...";
     
-    // Capturar la red social desde el parámetro 'src'[cite: 7]
     const urlParams = new URLSearchParams(window.location.search);
     const fuenteRaw = urlParams.get('src') || "Bio General";
     
-    // Formatear el nombre (ej: instagram -> Instagram)
-    const redSocial = fuenteRaw.charAt(0).toUpperCase() + fuenteRaw.slice(1);
+    // Normalizar nombre de la red social[cite: 7]
+    let redSocial = fuenteRaw.charAt(0).toUpperCase() + fuenteRaw.slice(1).toLowerCase();
+    
+    // Formato condicional para Notas
+    let notasFinal = "";
+    if (redSocial.toLowerCase() === "whatsapp") {
+      notasFinal = "🔔 Un Cliente, Contactó desde Whatsapp - Sucursal " + sucursal;
+    } else {
+      notasFinal = "Contactó desde " + redSocial + " - Sucursal " + sucursal;
+    }
 
     const payload = {
       sucursal: sucursal,
-      // Formato solicitado: Contactó desde [RedSocial] - Sucursal [Nombre]
-      notas: "Contactó desde " + redSocial + " - Sucursal " + sucursal
+      notas: notasFinal
     };
 
     try {
+      // Envío de datos al Script de Google[cite: 5, 7]
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -115,11 +123,11 @@
       });
     } catch (e) { console.warn(e); }
 
-    // Redirección a WhatsApp[cite: 7]
+    // Redirección final[cite: 4, 7]
     window.location.href = "https://api.whatsapp.com/send?phone=5215579248882&text=Hola!!%20Estoy%20interesada%20en%20un%20arreglo%20de%20flores%20%F0%9F%92%90y%2Fo%20globos%20%F0%9F%8E%88%E2%80%A6";
   }
 
-  // Fondo animado[cite: 4]
+  // Fondo animado de pétalos y emojis[cite: 4]
   const emojis = ['🌸','🎈','🌷','💐','🌼'];
   const bg = document.getElementById('bgDeco');
   for (let i = 0; i < 20; i++) {
