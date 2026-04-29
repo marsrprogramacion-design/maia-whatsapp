@@ -13,11 +13,9 @@
     }
     body {
       font-family: 'Nunito', sans-serif;
-      /* Fondo Verde Gradiente solicitado[cite: 4] */
       background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
       min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: 0;
     }
-    /* Animación de emojis flotantes[cite: 4] */
     .bg-deco { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
     .petal { position: absolute; font-size: 2rem; opacity: 0.35; animation: float linear infinite; }
     @keyframes float {
@@ -81,8 +79,8 @@
 
 <script>
   let sucursal = "";
-  // URL actualizada de tu Script de Google[cite: 1]
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwaOL3mtn672k95ROFIHbRCVPdZOLtqbdyRCAYwSFw-A-xtiCZKZgKWCLi58BrbP6pa/exec";
+  // Nuevo enlace de ejecución de Google Apps Script[cite: 1]
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOEassqt3vm8jataWRu6BW1MUVyZEbdI1Pgs-HPFyLowjXqAWWC-GJZk25EW3vAvJ4/exec";
 
   function sel(n) {
     sucursal = n;
@@ -98,15 +96,11 @@
     
     const payload = {
       sucursal: sucursal,
-      fecha: new Date().toLocaleDateString('es-MX'),
-      hora: new Date().toLocaleTimeString('es-MX', {hour12: false}),
-      mensaje: "Hola!! Estoy interesada en un arreglo de flores 💐 y/o globos 🎈…",
-      plataforma: "GitHub Web",
-      notas: "Registro desde Botón " + sucursal
+      notas: "Registro desde GitHub - " + sucursal
     };
 
     try {
-      // Envío de datos al Script de Google
+      // Envío de datos al Script de Google[cite: 5, 7]
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -115,11 +109,11 @@
       });
     } catch (e) { console.warn(e); }
 
-    // Redirección directa a WhatsApp[cite: 4]
+    // Redirección a WhatsApp[cite: 4, 7]
     window.location.href = "https://api.whatsapp.com/send?phone=5215579248882&text=Hola!!%20Estoy%20interesada%20en%20un%20arreglo%20de%20flores%20%F0%9F%92%90y%2Fo%20globos%20%F0%9F%8E%88%E2%80%A6";
   }
 
-  // Generador de fondo animado con emojis de flores y globos[cite: 4]
+  // Generador de fondo animado[cite: 4, 7]
   const emojis = ['🌸','🎈','🌷','💐','🌼'];
   const bg = document.getElementById('bgDeco');
   for (let i = 0; i < 20; i++) {
