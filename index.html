@@ -3,118 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contactar por WhatsApp - TIENDA MAIA</title>
+  <title>Contactar por WhatsApp - MAIA Florería</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --wa-green: #25D366; --wa-dark: #075E54;
-      --maia-purple: #a349a4; --maia-light: #fce4ec;
-      --radius: 18px;
+      --wa-green: #25D366; --maia-purple: #a349a4;
+      --text-dark: #1a1a1a; --radius: 22px;
     }
     body {
       font-family: 'Nunito', sans-serif;
       background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
-      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; margin: 0;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    /* Fondo de emojis flotantes */
+    .bg-deco { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .petal { position: absolute; font-size: 2rem; opacity: 0.25; animation: float linear infinite; }
+    @keyframes float {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.25; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
     .card {
-      background: #fff; border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-      max-width: 360px; width: 100%; overflow: hidden; position: relative;
+      position: relative; z-index: 10; background: #fff; border-radius: var(--radius);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.1); max-width: 380px; width: 95%; overflow: hidden;
     }
     .card-header {
-      background: linear-gradient(160deg, var(--wa-dark) 0%, var(--wa-green) 100%);
-      padding: 28px; text-align: center; color: white;
+      background: linear-gradient(160deg, #075E54 0%, var(--wa-green) 100%);
+      padding: 30px; text-align: center; color: white;
     }
-    .card-body { padding: 28px; text-align: center; }
-    h2 { font-size: 1.25rem; font-weight: 800; color: #333; margin-bottom: 12px; }
-    .sucursal-btns { display: flex; gap: 10px; margin: 20px 0; }
+    .wa-icon-main {
+      width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+    .card-body { padding: 30px; text-align: center; }
+    h2 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 15px; }
+    .sucursal-btns { display: flex; gap: 12px; margin: 20px 0; }
     .btn-suc {
       flex: 1; padding: 12px; border: 2px solid var(--maia-purple); border-radius: 12px;
-      background: white; color: var(--maia-purple); font-weight: 700; cursor: pointer; transition: 0.3s;
+      background: white; color: var(--maia-purple); font-weight: 800; cursor: pointer; transition: 0.3s;
     }
     .btn-suc.active { background: var(--maia-purple); color: white; }
-    
-    .card-footer { display: flex; gap: 12px; padding: 0 28px 20px; }
-    .btn-aceptar {
-      flex: 1; background: #4CAF50; color: white; padding: 14px; border: none;
-      border-radius: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+    .card-footer { display: flex; gap: 12px; padding: 0 30px 30px; }
+    .btn-accept {
+      flex: 1.5; background: var(--wa-green); color: white; border: none; padding: 15px;
+      border-radius: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .btn-aceptar:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
-    .tienda-footer { padding-bottom: 20px; font-size: 11px; color: #bbb; text-align: center; letter-spacing: 2px; }
-    .tienda-footer span { color: var(--maia-purple); font-weight: bold; }
+    .btn-accept:disabled { background: #ccc; cursor: not-allowed; }
+    .btn-close { flex: 1; background: #eee; border: none; border-radius: 15px; color: #666; font-weight: 700; cursor: pointer; }
+    .maia-label { font-size: 10px; color: #bbb; text-align: center; letter-spacing: 3px; padding-bottom: 20px; text-transform: uppercase; }
   </style>
 </head>
 <body>
-
+<div class="bg-deco" id="bgDeco"></div>
 <div class="card">
   <div class="card-header">
-    <div style="font-size: 40px;">🌿</div>
-    <p>Contáctanos directo por WhatsApp</p>
+    <div class="wa-icon-main">
+      <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+    <p style="font-size: 0.8rem; font-weight: 600;">Contáctanos directo por WhatsApp</p>
   </div>
   <div class="card-body">
     <h2>¿Deseas contactarnos por WhatsApp?</h2>
-    <p style="font-size: 14px; color: #666;">Selecciona tu sucursal para enviarnos un mensaje directo sobre tu arreglo de flores o globos 🌷 🎈</p>
-    
+    <p style="font-size: 0.9rem; color: #777;">Te redirigiremos a WhatsApp donde podrás enviarnos un mensaje sobre tu arreglo 🌷 🎈</p>
     <div class="sucursal-btns">
-      <button class="btn-suc" id="btnEca" onclick="selectSuc('Ecatepec')">Ecatepec</button>
-      <button class="btn-suc" id="btnTec" onclick="selectSuc('Tecámac')">Tecámac</button>
+      <button class="btn-suc" id="btnEca" onclick="sel('Ecatepec')">Ecatepec</button>
+      <button class="btn-suc" id="btnTec" onclick="sel('Tecámac')">Tecámac</button>
     </div>
   </div>
-
   <div class="card-footer">
-    <button class="btn-aceptar" id="btnAceptar" onclick="enviar()" disabled>✓ ACEPTAR ✓</button>
+    <button class="btn-close" onclick="window.close()">Cerrar</button>
+    <button class="btn-accept" id="btnAceptar" onclick="enviar()" disabled>✓ Aceptar ✓</button>
   </div>
-  <div class="tienda-footer">TIENDA <span>M A I A</span></div>
+  <div class="maia-label">TIENDA <span style="color:var(--maia-purple)">M A I A</span></div>
 </div>
 
 <script>
-  let sucSel = "";
-  // Nueva URL de tu Script de Google
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBFqf84lPlw0owoXYCc8b2ISyq2hMvISO3TKVoZQEWiPhnlck7weIGUcsseuFmLi8H/exec";
+  let sucursal = "";
+  // URL actualizada de tu Script de Google[cite: 4]
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpOYr-H5hs3z_DpE2F58cu4qI5wUtnvK4RPGbCwV4ekw459Uw_gApzvheejVi71iAC/exec";
 
-  function selectSuc(name) {
-    sucSel = name;
+  function sel(n) {
+    sucursal = n;
     document.getElementById('btnEca').classList.remove('active');
     document.getElementById('btnTec').classList.remove('active');
-    if(name === 'Ecatepec') document.getElementById('btnEca').classList.add('active');
-    else document.getElementById('btnTec').classList.add('active');
+    document.getElementById(n === 'Ecatepec' ? 'btnEca' : 'btnTec').classList.add('active');
     document.getElementById('btnAceptar').disabled = false;
   }
 
   async function enviar() {
     const btn = document.getElementById('btnAceptar');
-    const originalText = btn.innerText;
-    btn.innerText = "Registrando...";
-    btn.disabled = true;
-
+    btn.disabled = true; btn.innerText = "Registrando...";
     const ahora = new Date();
-    // Preparar datos para las 20 columnas de la hoja
+    // Payload estructurado para las 20 columnas[cite: 2]
     const payload = {
-      sucursal: sucSel,
+      sucursal: sucursal,
       fecha: ahora.toLocaleDateString('es-MX'),
-      hora: ahora.toLocaleTimeString('es-MX', {hour12:false}),
+      hora: ahora.toLocaleTimeString('es-MX', {hour12: false}),
       mensaje: "Hola!! Estoy interesada en un arreglo de flores 💐 y/o globos 🎈…",
       plataforma: "GitHub Web",
-      notas: "Contacto via Web - " + sucSel
+      notas: "Registro desde Botón " + sucursal
     };
-
     try {
-      // Envío al Script de Google
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    } catch (e) { 
-      console.log("Error de registro:", e); 
-    }
+      // Envío de datos en formato JSON
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+    } catch (e) {}
+    // Enlace directo a WhatsApp con emojis codificados[cite: 4]
+    window.location.href = "https://api.whatsapp.com/send?phone=5215579248882&text=Hola!!%20Estoy%20interesada%20en%20un%20arreglo%20de%20flores%20%F0%9F%92%90y%2Fo%20globos%20%F0%9F%8E%88%E2%80%A6";
+  }
 
-    // Redirección a WhatsApp con emojis correctamente codificados[cite: 3]
-    const waUrl = "https://api.whatsapp.com/send?phone=5215579248882&text=Hola!!%20Estoy%20interesada%20en%20un%20arreglo%20de%20flores%20%F0%9F%92%90y%2Fo%20globos%20%F0%9F%8E%88%E2%80%A6";
-    
-    setTimeout(() => {
-        window.location.href = waUrl;
-    }, 600);
+  // Lógica de fondo animado con emojis de flores y globos[cite: 4]
+  const emojis = ['🌸','🎈','🌷','💐','🌼'];
+  const bg = document.getElementById('bgDeco');
+  for (let i = 0; i < 15; i++) {
+    const el = document.createElement('span');
+    el.className = 'petal';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.animationDuration = (10 + Math.random() * 10) + 's';
+    el.style.animationDelay = (Math.random() * 5) + 's';
+    bg.appendChild(el);
   }
 </script>
 </body>
