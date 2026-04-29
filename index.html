@@ -81,8 +81,8 @@
 
 <script>
   let sucursal = "";
-  // URL actualizada de tu Script de Google[cite: 4]
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpOYr-H5hs3z_DpE2F58cu4qI5wUtnvK4RPGbCwV4ekw459Uw_gApzvheejVi71iAC/exec";
+  // URL actualizada de tu Script de Google
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwN_stdyapkc8RYrtehrDz8r9xkNFE1rEm5hXzm4RXr_8r2KNtfu8zXquJRWw6BlSVs/exec";
 
   function sel(n) {
     sucursal = n;
@@ -96,7 +96,8 @@
     const btn = document.getElementById('btnAceptar');
     btn.disabled = true; btn.innerText = "Registrando...";
     const ahora = new Date();
-    // Payload estructurado para las 20 columnas[cite: 2]
+    
+    // Payload JSON para el registro en las 20 columnas
     const payload = {
       sucursal: sucursal,
       fecha: ahora.toLocaleDateString('es-MX'),
@@ -105,15 +106,24 @@
       plataforma: "GitHub Web",
       notas: "Registro desde Botón " + sucursal
     };
+
     try {
-      // Envío de datos en formato JSON
-      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-    } catch (e) {}
-    // Enlace directo a WhatsApp con emojis codificados[cite: 4]
+      // Envío al Apps Script con modo no-cors para evitar bloqueos[cite: 4, 5]
+      await fetch(SCRIPT_URL, { 
+        method: 'POST', 
+        mode: 'no-cors', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload) 
+      });
+    } catch (e) {
+      console.log("Error al registrar contacto:", e);
+    }
+
+    // Redirección directa a WhatsApp con el mensaje codificado[cite: 4]
     window.location.href = "https://api.whatsapp.com/send?phone=5215579248882&text=Hola!!%20Estoy%20interesada%20en%20un%20arreglo%20de%20flores%20%F0%9F%92%90y%2Fo%20globos%20%F0%9F%8E%88%E2%80%A6";
   }
 
-  // Lógica de fondo animado con emojis de flores y globos[cite: 4]
+  // Generador de fondo animado con emojis flotantes[cite: 4]
   const emojis = ['🌸','🎈','🌷','💐','🌼'];
   const bg = document.getElementById('bgDeco');
   for (let i = 0; i < 15; i++) {
